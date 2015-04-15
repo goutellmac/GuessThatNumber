@@ -102,10 +102,19 @@ namespace GuessThatNumber
             {
                 return false;
             }
+            //you're hot check if the difference between NumberToGuess and userGuess is less than or equal to 5
+            else if ((NumberToGuess - userGuess) <= 5 && userGuess > NumberToGuess)
+            {
+                Console.WriteLine("You're HOT right now!!!");
+                Console.WriteLine("Your guess was HIGHER than the computer's number.");
+                Console.WriteLine("-------------------------------------------------");
+                return true;
+            }
             //if the userGuess is greater than the NumberToGuess then return true and print a message to the console.
             else if (userGuess > NumberToGuess)
             {
                 Console.WriteLine("Your guess was HIGHER than the computer's number.");
+                Console.WriteLine("-------------------------------------------------");
                 return true;
             }
             //by default return false
@@ -124,10 +133,19 @@ namespace GuessThatNumber
             {
                 return false;
             }
+            //cold check
+            else if ((NumberToGuess - userGuess) >= 50 && userGuess < NumberToGuess)
+            {
+                Console.WriteLine("You're COLD right now!!!");
+                Console.WriteLine("Your guess was LOWER than the computer's number.");
+                Console.WriteLine("-------------------------------------------------");
+                return true;
+            }
             //if the userGuess is less than the NumberToGuess return true and print a message to the console.
             else if (userGuess < NumberToGuess)
             {
                 Console.WriteLine("Your guess was LOWER than the computer's number.");
+                Console.WriteLine("-------------------------------------------------");
                 return true;
 
             }
