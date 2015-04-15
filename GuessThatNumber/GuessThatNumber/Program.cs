@@ -9,7 +9,7 @@ namespace GuessThatNumber
     public class Program
     {
         //this is the number the user needs to guess.  Set its value in your code using a RNG.
-        public static int NumberToGuess = 0; 
+        public static int NumberToGuess; 
         
        
         static void Main(string[] args)
@@ -21,24 +21,38 @@ namespace GuessThatNumber
             //make NumberToGuess a random number between 1 and 100
             NumberToGuess = rng.Next(1, 101);
             int NumberOfGuesses = 0;
+            //declare boolean to allow user to choose between playing more or not playing
             bool play = true;
+            String StringInput = "1";
             
             while (play == true)
             {
 
-                //set the NumberToGuess
-                SetNumberToGuess(NumberToGuess);
+                //tell user that the number is between 1 and 100
                 Console.WriteLine("The computer has generated a number between 1 and 100.");
-                while (input != NumberToGuess)
+                Console.WriteLine("-------------------------------------------------");
+                Console.WriteLine("What is the number?");
+                
+                
+
+                while ((int.Parse(StringInput)) != NumberToGuess)
                 {
                     Console.Write("What is the number?");
-                    input = int.Parse(Console.ReadLine());
-                    IsGuessTooHigh(input);
-                    IsGuessTooLow(input);
-                    NumberOfGuesses++;
+                    StringInput = Console.ReadLine();
+
+                    //take in user input and test its validity
+                    if (ValidateInput(StringInput))
+                    {
+                        IsGuessTooHigh(int.Parse(StringInput));
+                        IsGuessTooLow(int.Parse(StringInput));
+                        NumberOfGuesses++;
+                        
+                    }
+                    
 
                 }
                 //output to the user various success statements
+                Console.WriteLine("-------------------------------------------------");
                 Console.WriteLine("You got it!");
                 Console.WriteLine("It took you {0} guesses.", NumberOfGuesses);
                 Console.WriteLine("The number is: {0} ", NumberToGuess);
@@ -50,6 +64,10 @@ namespace GuessThatNumber
                 if (input == 1)
                 {
                     play = true;
+                    //reset guess counter
+                    NumberOfGuesses = 0;
+                    //randomize number to guess
+                    NumberToGuess = rng.Next(1, 101);
                 }
                 else
                 {
@@ -63,21 +81,26 @@ namespace GuessThatNumber
         
         public static bool ValidateInput(string userInput)
         {
-            //test for invalid input and store boolean result in variable test
-            
-            //work on tomorrow... cannot figure this **** out
-            //jk figured out tryparse
+          
             int userNumber;
-            if (int.TryParse(userInput, out userNumber) == true)
+            //make sure that the user didnt enter nothing
+            if (userInput != null && userInput != string.Empty)
             {
-                return true;
+
+                //if the user entered something then try to parse the string for an integer
+                if (int.TryParse(userInput, out userNumber) == true)
+                {
+                    //make sure the parsed integer is between 1 and 100
+                    if (userNumber > 0 && userNumber < 101)
+                    {
+                        return true;
+                    }
+                }
+
+
             }
-            
-           
-            else
-            {
-                return false;
-            }
+            Console.WriteLine("Please enter a valid guess - That is: A number between 1 and 100.");
+            return false;
             
             
         }
@@ -102,18 +125,20 @@ namespace GuessThatNumber
             {
                 return false;
             }
-            //you're hot check if the difference between NumberToGuess and userGuess is less than or equal to 5
-            else if ((NumberToGuess - userGuess) <= 5 && userGuess > NumberToGuess)
+           
+            
+            //if the userGuess is greater than the NumberToGuess then return true and print a message to the console.
+            if (userGuess > NumberToGuess)
             {
-                Console.WriteLine("You're HOT right now!!!");
                 Console.WriteLine("Your guess was HIGHER than the computer's number.");
                 Console.WriteLine("-------------------------------------------------");
                 return true;
             }
-            //if the userGuess is greater than the NumberToGuess then return true and print a message to the console.
-            else if (userGuess > NumberToGuess)
+            //you're hot check if the difference between NumberToGuess and userGuess is less than or equal to 5
+            if ((NumberToGuess - userGuess) <= 10)
             {
-                Console.WriteLine("Your guess was HIGHER than the computer's number.");
+                Console.WriteLine("You're HOT right now!!!");
+
                 Console.WriteLine("-------------------------------------------------");
                 return true;
             }
@@ -134,7 +159,7 @@ namespace GuessThatNumber
                 return false;
             }
             //cold check
-            else if ((NumberToGuess - userGuess) >= 50 && userGuess < NumberToGuess)
+            if ((NumberToGuess - userGuess) >= 50 && userGuess < NumberToGuess)
             {
                 Console.WriteLine("You're COLD right now!!!");
                 Console.WriteLine("Your guess was LOWER than the computer's number.");

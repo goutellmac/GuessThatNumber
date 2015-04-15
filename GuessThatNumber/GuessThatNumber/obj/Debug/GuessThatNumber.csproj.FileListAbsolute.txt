@@ -13,4 +13,3 @@ C:\Users\Technologist SP\Documents\GitHub\GuessThatNumber\GuessThatNumber\GuessT
 C:\Users\Technologist SP\Documents\GitHub\GuessThatNumber\GuessThatNumber\GuessThatNumber\bin\Debug\GuessThatNumber.pdb
 C:\Users\Technologist SP\Documents\GitHub\GuessThatNumber\GuessThatNumber\GuessThatNumber\bin\Debug\nunit.framework.dll
 C:\Users\Technologist SP\Documents\GitHub\GuessThatNumber\GuessThatNumber\GuessThatNumber\bin\Debug\nunit.framework.xml
-C:\Users\Technologist SP\Documents\GitHub\GuessThatNumber\GuessThatNumber\GuessThatNumber\obj\Debug\GuessThatNumber.csprojResolveAssemblyReference.cache
